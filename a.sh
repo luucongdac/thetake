@@ -378,3 +378,62 @@ encrype() {
 }
 
 #=============================================================[end 7zip with password]==============================================================================
+
+
+
+getWordsMeta() {
+    local keyWords=()
+    local keyPass=""
+    local sum_ascii=0
+    local ascii_keyPass=()
+    local fileWord=""
+    # Nhập mật khẩu
+
+    read -p "Enter the path to the input file: " fileWord
+    if [[ ! -f "$fileWord" ]]; then
+        echo "Error: File not found."
+        return 1
+    fi
+
+    read -s -p  "Input password to gen Words for Meta: " keyPass
+
+    mapfile -t keyWords < $fileWord
+
+    # Tính tổng ASCII của các ký tự trong mật khẩu
+    for (( i=0; i<${#keyPass}; i++ )); do
+        ascii_value=$(printf "%d" "'${keyPass:$i:1}")
+        ascii_keyPass+=($ascii_value)
+        ((sum_ascii+=ascii_value))
+    done
+
+    # Điều chỉnh sum_ascii nếu cần
+    if (( sum_ascii > ${#keyWords[@]}/2 )); then
+        sum_ascii=$((sum_ascii / 2))
+    fi
+
+    # Sắp xếp ASCII tăng và giảm
+    IFS=$'\n' sorted_increase=($(printf "%s\n" "${ascii_keyPass[@]}" | sort -n))
+    IFS=$'\n' sorted_decrease=($(printf "%s\n" "${ascii_keyPass[@]}" | sort -nr))
+
+    local key=()
+
+    # Thêm từ theo thứ tự giảm dần
+    for ascii in "${sorted_decrease[@]}"; do
+        index=$((sum_ascii - ascii))
+        if (( index >= 0 && index < ${#keyWords[@]} )); then
+            key+=("${keyWords[index]}")
+        fi
+    done
+
+    # Thêm từ theo thứ tự tăng dần
+    for ascii in "${sorted_increase[@]}"; do
+        index=$((sum_ascii + ascii))
+        if (( index >= 0 && index < ${#keyWords[@]} )); then
+            key+=("${keyWords[index]}")
+        fi
+    done
+
+    # In kết quả
+    echo "   "
+    echo "${key[*]}"
+}
