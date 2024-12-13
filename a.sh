@@ -437,3 +437,53 @@ getWordsMeta() {
     echo "   "
     echo "${key[*]}"
 }
+
+keyCharacter=(
+    "abcdefghijklmnopqrstuvwxyz"
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "0123456789"
+    "!#$%&()*+[]^{}~:;<=>?@"
+)
+
+# Hàm tính tổng ASCII của chuỗi
+calculate_sum_ascii() {
+    local input_string="$1"
+    local sum=0
+    for ((i=0; i<${#input_string}; i++)); do
+        sum=$((sum + $(printf "%d" "$(printf '%d' "'${input_string:i:1}")")))
+    done
+    echo "$sum"
+}
+
+# Hàm sinh password
+getPassWords() {
+    read -p "Input password to gen password: " keyPass
+
+    local sum_ascii
+    sum_ascii=$(calculate_sum_ascii "$keyPass")
+
+    local key=""
+    local count=0
+
+    for ((i=0; i<${#keyPass}; i++)); do
+        local char=${keyPass:i:1}
+        local genKey=$(( $(printf "%d" "$(printf '%d' "'${char}")") + sum_ascii ))
+
+        while ((genKey >= ${#keyCharacter[count]})); do
+            local temp="$genKey"
+            genKey=0
+            for ((j=0; j<${#temp}; j++)); do
+                genKey=$((genKey + ${temp:j:1}))
+            done
+        done
+
+        key+="${keyCharacter[count]:genKey:1}"
+        count=$((count + 1))
+        if ((count >= ${#keyCharacter[@]})); then
+            count=0
+        fi
+    done
+
+    echo "$key"
+}
+
