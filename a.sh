@@ -374,14 +374,14 @@ encrype() {
     # Giới hạn độ dài mã thành 255 ký tự
     key="${key:0:255}"
 
-    echo "$key"
+    echo -e "${RED} $key ${NC}"
 }
 
 #=============================================================[end 7zip with password]==============================================================================
 
 
 
-getWordsMeta() {
+metaWord() {
     local keyWords=()
     local keyPass=""
     local sum_ascii=0
@@ -392,6 +392,7 @@ getWordsMeta() {
     read -p "Enter the path to the input file: " fileWord
     if [[ ! -f "$fileWord" ]]; then
         echo "Error: File not found."
+        echo -e "${RED} ref: /d/02_Git/MT5/Meta_words.txt  ${NC}"
         return 1
     fi
 
@@ -435,7 +436,9 @@ getWordsMeta() {
 
     # In kết quả
     echo "   "
+    echo -e "${RED}"
     echo "${key[*]}"
+    echo -e "${NC}"
 }
 
 keyCharacter=(
@@ -452,12 +455,12 @@ calculate_sum_ascii() {
     for ((i=0; i<${#input_string}; i++)); do
         sum=$((sum + $(printf "%d" "$(printf '%d' "'${input_string:i:1}")")))
     done
-    echo "$sum"
+    #echo "$sum"
 }
 
 # Hàm sinh password
-getPassWords() {
-    read -p "Input password to gen password: " keyPass
+passWord() {
+    read -s -p "Input password to gen password: " keyPass
 
     local sum_ascii
     sum_ascii=$(calculate_sum_ascii "$keyPass")
@@ -484,6 +487,6 @@ getPassWords() {
         fi
     done
 
-    echo "$key"
+    echo -e "${RED} $key ${NC}"
 }
 
