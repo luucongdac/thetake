@@ -343,7 +343,7 @@ body {
     width: 60px;
     height: 25px;
     font-weight: bold;
-    color: black;
+    color: orange;
     font-family: Arial, sans-serif; /* Thêm dòng này để thay đổi font chữ */
   }
   .day, .dt {
@@ -382,3 +382,41 @@ body {
   }
   body.night h1 { color: #EEE; }
   body.night .day, body.night .mo { color: #aaa; }
+
+
+
+/* Đổi màu tháng hiện tại */
+.mo.today-month {
+  background-color: red; /* Nền vàng cho tháng hiện tại */
+  color: white; /* Chữ đỏ cho tháng hiện tại */
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;  
+}
+/* Định dạng ngày thường và cuối tuần */
+.weekday {
+  color: silver; /* Màu tím cho ngày trong tuần */
+}
+
+.weekend {
+  color: orange; /* Màu đỏ cho Thứ 7 và Chủ nhật */
+}
+
+/* Đổi màu ngày hiện tại */
+.today {
+  background-color: red; /* Nền xanh lá cho ngày hiện tại */
+  color: white; /* Chữ trắng */
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/* Đổi màu cho ngày trong tuần tương ứng */
+.today-day {
+  background-color: blue; /* Nền xanh dương */
+  color: white; /* Chữ trắng */
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+}
+
