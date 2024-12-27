@@ -1,12 +1,12 @@
 const rawData = `
 - c#o#n#g#d#a#c#0#9#@g#m#a#i#l#.c#o#m#
-- --------------------[s#h#a#r#e#d# i#n#d#i#c#a#t#o#r# p#r#i#v#a#t#e#d#]------------------
+- ---------------------------[s#h#a#r#e#d# i#n#d#i#c#a#t#o#r# p#r#i#v#a#t#e#d#]------------------
 - 【T#h#e#☯T#a#k#e#】:  h#t#t#p#s#://w#w#w#.t#r#a#d#i#n#g#v#i#e#w#.c#o#m#/s#c#r#i#p#t#/e#I#d#B#8#h#n#Q#-T#h#e#-T#a#k#e#/
 - ☯: h#t#t#p#s#://w#w#w#.t#r#a#d#i#n#g#v#i#e#w#.c#o#m#/s#c#r#i#p#t#/k#0#4#P#s#y#v#B#/
 - ☯ a#l#e#r#t#: h#t#t#p#s#://w#w#w#.t#r#a#d#i#n#g#v#i#e#w#.c#o#m#/s#c#r#i#p#t#/L#6#a#5#X#b#y#Z#-a#l#e#r#t#/
 - A#l#e#r#t# V#o#l#: h#t#t#p#s#://w#w#w#.t#r#a#d#i#n#g#v#i#e#w#.c#o#m#/s#c#r#i#p#t#/8#h#u#O#U#p#b#V#-A#l#e#r#t#-m#u#l#t#i#-s#y#m#b#o#l#s#-a#t#-s#p#e#c#i#f#i#c#-t#i#m#e#f#r#a#m#e#-i#n#-N#-d#a#y#-l#o#o#k#-b#a#c#k#/
 - ------------------------------------------------------------------
-- --------------------------[l#i#s#t# s#y#m#b#o#l#]----------------------------
+- ---------------------------[l#i#s#t# s#y#m#b#o#l#]----------------------------
 - l#i#s#t# s#y#m#b#o#l#s#: h#t#t#p#s#://w#w#w#.t#r#a#d#i#n#g#v#i#e#w#.c#o#m#/w#a#t#c#h#l#i#s#t#s#/6#3#9#1#0#8#6#4#/
 - d#e#f#a#u#l#t#: h#t#t#p#s#://w#w#w#.t#r#a#d#i#n#g#v#i#e#w#.c#o#m#/c#h#a#r#t#/
 - 
@@ -273,7 +273,7 @@ document.getElementById("play-button").addEventListener("click", () => {
         // Dừng video: Xóa src để dừng video hoàn toàn
         videoFrame.src = "";
         videoContainer.style.display = "none";
-        document.body.style.backgroundImage = "url('./1.gif')"; // Hiển thị lại GIF
+        document.body.style.backgroundImage = "url('./thetake.gif')"; // Hiển thị lại GIF
         playButton.textContent = "Play YouTube";
         isVideoPlaying = false;
     } else {
