@@ -20,7 +20,7 @@ body {
   .fill {
     position: absolute;
     top: 250px; /* Cách mép trên */
-    right: 350px; /* Cách mép phải */
+    right: 650px; /* Cách mép phải */
     width: 500px; /* Đảm bảo kích thước phù hợp với đồng hồ */
     height: 500px; /* Đảm bảo kích thước phù hợp với đồng hồ */
   }
@@ -303,7 +303,7 @@ body {
     font: 15px Verdana, sans-serif;
     position: absolute;
     top: 50px; /* Cách mép trên 10px */
-    right: 1100px; /* Cách mép phải 10px */
+    right: 1400px; /* Cách mép phải 10px */
     color: white;
     z-index: 1;
     opacity: 0.5;
@@ -316,3 +316,69 @@ body {
   #chooser div:hover {
     background: rgba(255, 255, 255, 0.4);
   }
+
+
+  /* * {
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  } */
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #f7f7f9;
+    color: red;
+    border-top: 15px solid #4d4d4d;
+    font-size: 20pt;
+  }
+  a:link, a:active, a:visited {
+    color: red;
+    text-decoration: none;
+  }
+  .dt, .day, .mo {
+    text-align: right;
+    width: 60px;
+    height: 25px;
+  }
+  .day, .mo {
+    width: 60px;
+    height: 25px;
+    font-weight: bold;
+    color: black;
+    font-family: Arial, sans-serif; /* Thêm dòng này để thay đổi font chữ */
+  }
+  .day, .dt {
+    margin-bottom: 2px;
+  }
+  .mo {
+    margin-bottom: 10px;
+  }
+  table, td {
+    border-spacing: 0;
+    vertical-align: top;
+  }
+  h1 {
+    display: inline-block;
+    font-size: 4.5em;
+    margin: 30px 0 0 40px;
+  }
+  h2 {
+    margin: 0 0 30px 40px;
+  }
+
+
+  #cal {
+    position: absolute;
+    top: 30px; /* Dịch lịch xuống 100px từ đầu trang */
+    right: 50px; /* Căn phải với khoảng cách 100px từ mép phải */
+    width: auto; /* Đảm bảo chiều rộng của lịch tự động */
+  }
+  #time {
+    float: right;
+  }
+  
+  body.night {
+    background-color: #111;
+    color: #EEE;
+  }
+  body.night h1 { color: #EEE; }
+  body.night .day, body.night .mo { color: #aaa; }
