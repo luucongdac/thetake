@@ -491,59 +491,6 @@ function dayOfWeek(day, month, year) {
 }
 
 
-
-
-function renderMonth(parent, month, year) {
-  var dateCells = $(parent + " div.dt"); // Các ô ngày
-  var dayHeaders = $(parent + " div.day"); // Các ô tên ngày trong tuần
-  var monthCell = $(parent + " div.mo"); // Ô tên tháng
-  var cellid = dayOfWeek(1, month, year) - 1; // Vị trí ngày đầu tiên của tháng
-  var max = mtbl[month - 1]; // Số ngày trong tháng
-  if (max == 28 && leap) max = 29;
-
-  var today = new Date(); // Ngày hiện tại
-  var currentDay = today.getDate(); // Lấy ngày (1-31)
-  var currentMonth = today.getMonth(); // Lấy tháng (0-11)
-  var currentYear = today.getFullYear(); // Lấy năm (YYYY)
-  var currentDayOfWeek = today.getDay(); // Lấy thứ trong tuần (0=Chủ Nhật, 1=Thứ 2, ...)
-
-  // Đặt tên tháng và loại bỏ lớp cũ nếu có
-  monthCell.html(mnames[month - 1]).removeClass("today-month");
-  if (year === currentYear && month - 1 === currentMonth) {
-      monthCell.addClass("today-month"); // Đổi màu tháng hiện tại
-  }
-
-  // Xóa các lớp cũ trước khi render
-  dateCells.removeClass("today weekday weekend");
-  dayHeaders.removeClass("today-day");
-
-  // Điền số ngày vào lịch
-  for (var ix = 1; ix <= max; ix++) {
-      var dateCell = dateCells.eq(cellid);
-      dateCell.html(ix);
-
-      var dow = dayOfWeek(ix, month, year); // Thứ của ngày này (1=Chủ nhật,...)
-
-      // Xác định loại ngày: weekday hoặc weekend
-      if (dow === 1 || dow === 7) { // Chủ nhật hoặc Thứ 7
-          dateCell.addClass("weekend");
-      } else { // Các ngày trong tuần
-          dateCell.addClass("weekday");
-      }
-
-      // Kiểm tra nếu là ngày hiện tại
-      if (year === currentYear && month - 1 === currentMonth && ix === currentDay) {
-          dateCell.addClass("today"); // Đổi màu ngày hiện tại
-          // Đổi màu tên ngày trong tuần tương ứng
-          // Note: dayHeaders index: 0=Su, 1=Mo, ..., 6=Sa
-          var weekdayIndex = dow - 1; // Tương ứng với 0=Su, ..., 6=Sa
-          dayHeaders.eq(weekdayIndex).addClass("today-day");
-      }
-
-      cellid++;
-  }
-}
-
 function renderMonth(parent, month, year) {
   var dateCells = $(parent + " div.dt"); // Các ô ngày
   var dayHeaders = $(parent + " div.day"); // Các ô tên ngày trong tuần

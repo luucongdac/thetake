@@ -391,11 +391,11 @@ body {
   color: white; /* Chữ đỏ cho tháng hiện tại */
   font-weight: bold;
   border-radius: 5px;
-  padding: 5px;  
+  /* padding: 5px;   */
 }
 /* Định dạng ngày thường và cuối tuần */
 .weekday {
-  color: silver; /* Màu tím cho ngày trong tuần */
+  color: whitesmoke; /* Màu tím cho ngày trong tuần */
 }
 
 .weekend {
@@ -408,7 +408,7 @@ body {
   color: white; /* Chữ trắng */
   font-weight: bold;
   border-radius: 5px;
-  padding: 5px;
+  /* padding: 5px; */
 }
 
 /* Đổi màu cho ngày trong tuần tương ứng */
