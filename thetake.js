@@ -646,15 +646,15 @@ function startTime() {
   var minute = today.getMinutes();
   var second = today.getSeconds();
 
-  if (hour > 12) {
-    hour -= 12;
-  } else if (hour === 0) {
-    hour = 12;
-  }
+  // if (hour > 12) {
+  //   hour -= 12;
+  // } else if (hour === 0) {
+  //   hour = 12;
+  // }
 
   minute = checkTime(minute);
   second = checkTime(second);
-  $('#time').text(hour + ":" + minute + ":" + second);
+  $('#time').text("[" + hour + ":" + minute + ":" + second + "]");
   t = setTimeout(function(){startTime()},500);
 }
 

@@ -395,17 +395,17 @@ body {
 }
 /* Định dạng ngày thường và cuối tuần */
 .weekday {
-  color: whitesmoke; /* Màu tím cho ngày trong tuần */
+  color: red; /* Màu tím cho ngày trong tuần */
 }
 
 .weekend {
-  color: orange; /* Màu đỏ cho Thứ 7 và Chủ nhật */
+  color: green; /* Màu đỏ cho Thứ 7 và Chủ nhật */
 }
 
 /* Đổi màu ngày hiện tại */
 .today {
-  background-color: red; /* Nền xanh lá cho ngày hiện tại */
-  color: white; /* Chữ trắng */
+  background-color: yellow; /* Nền xanh lá cho ngày hiện tại */
+  color: black; /* Chữ trắng */
   font-weight: bold;
   border-radius: 5px;
   /* padding: 5px; */
