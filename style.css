@@ -374,7 +374,7 @@ body {
   }
   #time {
     float: right;
-    color: blue;
+    color: red;
   }
   
   body.night {
@@ -384,8 +384,15 @@ body {
   body.night h1 { color: #EEE; }
   body.night .day, body.night .mo { color: #aaa; }
 
-
-
+  #caltitle {
+    color: green; /* Đổi màu thành đỏ */
+  }
+  #next {
+    color: blue; /* Đổi màu thành đỏ */
+  }
+  #prev {
+    color: violet; /* Đổi màu thành đỏ */
+  }  
 /* Đổi màu tháng hiện tại */
 .mo.today-month {
   background-color: red; /* Nền vàng cho tháng hiện tại */
@@ -465,18 +472,20 @@ audio {
   margin-top: 20px;
 }
 .song-buttons button {
-  margin: 5px;
+  margin: 6px;
   padding: 12px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  background-color: black;
+  color: white;
+  border: 1 solid #ccc;
+  border-radius: 20px;
   transition: all 0.3s;
   font-weight: normal;
 }
 .song-buttons button:hover {
-  background-color: #ddd;
+  /* background-color: white; */
+  color: red;
   transform: scale(1.1);
 }
 .song-buttons button.active {
