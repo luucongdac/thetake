@@ -614,7 +614,7 @@ function renderCalendar(startMonth, stopMonth, year) {
   var monthseq = getMonthSequence(seqargs);
 
   $("#caltitle").text(year);
-  $("title").text(year);
+  // $("title").text(year);
   $('#prev').attr('href', '#' + (year-1)).text(year-1);
   $('#next').attr('href', '#' + (year+1)).text(year+1);
 
@@ -654,8 +654,11 @@ function startTime() {
 
   minute = checkTime(minute);
   second = checkTime(second);
-  $('#time').text( hour + ":" + minute + ":" + second );
+  var textTime = hour + ":" + minute + ":" + second;
+  $('#time').text(textTime );
   t = setTimeout(function(){startTime()},500);
+
+  $("title").text("【The☯Take】" + " " + textTime);
 }
 
 function checkTime(i) {
@@ -710,9 +713,9 @@ let currentSongIndex = -1;
 let isRepeat = false;
 let isRandom = false;
 
-// Hàm lấy toàn bộ file từ thư mục Google Drive (với pagination)
 async function fetchAllSongs() {
-  let url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='audio/mpeg'&key=${API_KEY}&fields=nextPageToken,files(id,name)`;
+  // let url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='audio/mpeg'&key=${API_KEY}&fields=nextPageToken,files(id,name,createdTime)&orderBy=createdTime desc`;
+  let url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='audio/mpeg'&key=${API_KEY}&fields=nextPageToken,files(id,name)&orderBy=name asc`;
   let allSongs = [];
   let nextPageToken = null;
 
@@ -727,6 +730,7 @@ async function fetchAllSongs() {
 
   return allSongs;
 }
+
 
 // Hàm tạo nút phát nhạc với thứ tự
 function createSongButton(name, id, index) {

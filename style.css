@@ -374,7 +374,7 @@ body {
   }
   #time {
     float: right;
-    color: #EEE;
+    color: blue;
   }
   
   body.night {
