@@ -654,7 +654,7 @@ function startTime() {
 
   minute = checkTime(minute);
   second = checkTime(second);
-  $('#time').text("[" + hour + ":" + minute + ":" + second + "]");
+  $('#time').text( hour + ":" + minute + ":" + second );
   t = setTimeout(function(){startTime()},500);
 }
 
@@ -694,3 +694,130 @@ $(document).ready(function () {
   startTime();
   
 });
+// ================================================[mp3 play]=====================================
+let API_KEY = 'TheAIzaSyB2l0pKgTa8e0RwXcBxBfeYunMAitAke-P8eY8'; // API Key của bạn
+const FOLDER_ID = '1ZP3N6gmNBDbGnCPq3LrQIZeh9-LqSXM-'; // Folder ID của bạn
+
+const audioPlayer = document.getElementById('audioPlayer');
+const songList = document.getElementById('songList');
+const randomButton = document.getElementById('randomButton');
+const repeatButton = document.getElementById('repeatButton');
+const muteButton = document.getElementById('muteButton');
+const apiKeyInput = document.getElementById('apiKeyInput');
+
+let songData = [];
+let currentSongIndex = -1;
+let isRepeat = false;
+let isRandom = false;
+
+// Hàm lấy toàn bộ file từ thư mục Google Drive (với pagination)
+async function fetchAllSongs() {
+  let url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='audio/mpeg'&key=${API_KEY}&fields=nextPageToken,files(id,name)`;
+  let allSongs = [];
+  let nextPageToken = null;
+
+  do {
+    const response = await fetch(nextPageToken ? `${url}&pageToken=${nextPageToken}` : url);
+    const data = await response.json();
+    if (data.files) {
+      allSongs = allSongs.concat(data.files);
+    }
+    nextPageToken = data.nextPageToken;
+  } while (nextPageToken);
+
+  return allSongs;
+}
+
+// Hàm tạo nút phát nhạc với thứ tự
+function createSongButton(name, id, index) {
+  const button = document.createElement('button');
+  button.textContent = `${index + 1}. ${name}`;
+  button.onclick = () => playSong(index);
+  songList.appendChild(button);
+}
+
+// Hàm phát nhạc
+function playSong(index) {
+  if (currentSongIndex !== -1) {
+    songList.children[currentSongIndex].classList.remove('active');
+  }
+  currentSongIndex = index;
+  const { id } = songData[index];
+  const streamUrl = `https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${API_KEY}`;
+  audioPlayer.src = streamUrl;
+  audioPlayer.play();
+  songList.children[currentSongIndex].classList.add('active');
+}
+
+// Phát bài ngẫu nhiên sau khi bài trước kết thúc
+function playRandomSong() {
+  const randomIndex = Math.floor(Math.random() * songData.length);
+  playSong(randomIndex);
+}
+
+// Phát bài theo chế độ ngẫu nhiên
+randomButton.onclick = () => {
+  isRandom = !isRandom;
+  randomButton.classList.toggle('on', isRandom);
+  randomButton.classList.toggle('off', !isRandom);
+  randomButton.textContent = `Random: ${isRandom ? 'On' : 'Off'}`;
+  if (isRandom && currentSongIndex === -1) {
+    playRandomSong();
+  }
+};
+
+// Bật/Tắt repeat
+repeatButton.onclick = () => {
+  isRepeat = !isRepeat;
+  repeatButton.classList.toggle('on', isRepeat);
+  repeatButton.classList.toggle('off', !isRepeat);
+  repeatButton.textContent = `Repeat: ${isRepeat ? 'On' : 'Off'}`;
+};
+
+// Tắt/Bật âm thanh
+muteButton.onclick = () => {
+  audioPlayer.muted = !audioPlayer.muted;
+  muteButton.classList.toggle('on', audioPlayer.muted);
+  muteButton.classList.toggle('off', !audioPlayer.muted);
+  muteButton.textContent = `Mute: ${audioPlayer.muted ? 'On' : 'Off'}`;
+};
+
+// Lặp lại bài hát nếu bật repeat
+audioPlayer.onended = () => {
+  if (isRepeat) {
+    audioPlayer.play();
+  } else if (isRandom) {
+    playRandomSong();
+  }
+};
+
+// Hàm cập nhật API_KEY sau khi xóa ký tự theo input
+function updateApiKey() {
+  const inputValue = apiKeyInput.value.trim().replace(/\s+/g, '');
+  const charactersToRemove = inputValue.split(',').map(str => str.trim());
+  charactersToRemove.forEach(removeStr => {
+    API_KEY = API_KEY.replace(new RegExp(removeStr, 'g'), '');
+  });
+  // Sau khi cập nhật API_KEY, tải lại các bài hát
+  loadSongs();
+}
+
+// Gọi hàm để lấy danh sách bài hát khi tải trang
+function loadSongs() {
+  songList.innerHTML = ''; // Xóa các nút bài hát cũ
+  fetchAllSongs().then(songs => {
+    songData = songs;
+    songs.forEach((file, index) => {
+      createSongButton(file.name, file.id, index);
+    });
+  }).catch(error => {
+    console.error('Error fetching songs:', error);
+    songList.innerHTML = '<p>Error loading songs. Check console for details.</p>';
+  });
+}
+
+// Lấy bài hát khi trang được tải
+loadSongs();
+
+
+//================================================================================================
