@@ -413,7 +413,7 @@ body {
 /* Đổi màu ngày hiện tại */
 .today {
   background-color: yellow; /* Nền xanh lá cho ngày hiện tại */
-  color: black; /* Chữ trắng */
+  /* color: black; */
   font-weight: bold;
   border-radius: 5px;
   /* padding: 5px; */
